@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
         vel.y = 0;
 
         // if we are moving, rotate to face our moving direction.
-        if (vel.x != 0 || vel.z != 0) // Rotate to match velocity but ONLY if the Player is in motion.
+        if ((vel.x != 0 || vel.z != 0) && isGrounded == true) // Rotate to match velocity but ONLY if the Player is in motion.
         {
             transform.forward = vel;
         }
