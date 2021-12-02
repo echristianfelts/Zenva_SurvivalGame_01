@@ -2,63 +2,66 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
     public float moveSpeed;
-    public float jumpForce;
     public Rigidbody rig;
+    public float jumpForce;
 
     public int score;
 
-
     private bool isGrounded;
+
+    public GameObject ui;
 
     // Update is called once per frame
     void Update()
     {
-        // NOTE: This movement controller is set for World Space.
-        //  This will have to be changed to Player Space at some point.
-
-        // Vertical and horizontal inputs.
+        // get the horizontal and vertical inputs
         float x = Input.GetAxis("Horizontal") * moveSpeed;
         float z = Input.GetAxis("Vertical") * moveSpeed;
 
-        // Set velocity based on inputs.
+        // set our velocity based on our inputs
         rig.velocity = new Vector3(x, rig.velocity.y, z);
 
-        // Rotate to match velocity/direction of movement
-        // Create copy of velocity variable and set Y axis to be 0
+        // create a copy of our velocity variable and
+        // set the Y axis to be 0
         Vector3 vel = rig.velocity;
         vel.y = 0;
 
-        // if we are moving, rotate to face our moving direction.
-        if ((vel.x != 0 || vel.z != 0) && isGrounded == true) // Rotate to match velocity but ONLY if the Player is in motion.
+        // if we're moving, rotate to face our moving direction
+        if (vel.x != 0 || vel.z != 0)
         {
             transform.forward = vel;
         }
 
+        // jump if we're grounded and we press the Space key
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded == true)
         {
             isGrounded = false;
             rig.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
-        if(transform.position.y < -10)
+        // game over if we fall off the map
+        if (transform.position.y < -10)
         {
             GameOver();
         }
     }
 
+    // called when we collide with another object
     private void OnCollisionEnter(Collision collision)
     {
+        // are we standing on the surface?
         if (collision.contacts[0].normal == Vector3.up)
         {
             isGrounded = true;
         }
     }
 
-    //This method restarts the scene...
+    // called when the player hits an enemy or falls off the level
     public void GameOver()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -67,6 +70,6 @@ public class Player : MonoBehaviour
     public void AddScore(int amount)
     {
         score += amount;
+        ui.GetComponent<UIController>().SetScoreText(score);
     }
-
 }

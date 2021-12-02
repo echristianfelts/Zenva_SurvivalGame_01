@@ -58,6 +58,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c19c066cba49324c8a3fafd5dbbf6a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
+  moveDirection: {x: 0, y: 0, z: 0}
+  moveDistance: 0
 --- !u!1001 &3799602445566867218
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -124,11 +127,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 2a55dedfdf45a87468677e3098049c07, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 94a5e271dd0766a488d21ce26e432a7a, type: 2}
+      objectReference: {fileID: 2100000, guid: 4ded455d2b64d2043a83741810acb7cc, type: 2}
     - target: {fileID: -7511558181221131132, guid: 2a55dedfdf45a87468677e3098049c07, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: f81e9a9b9eee2a24aa3475aa3b7878f5, type: 2}
+      objectReference: {fileID: 2100000, guid: 071147738b1406f4fa369c8152271cf4, type: 2}
     - target: {fileID: 919132149155446097, guid: 2a55dedfdf45a87468677e3098049c07, type: 3}
       propertyPath: m_Name
       value: cube
